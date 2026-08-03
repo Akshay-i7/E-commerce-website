@@ -1,0 +1,61 @@
+.navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:58px;
+    flex-direction:row;
+    border:solid;
+    border-width:1px;
+    border-left:none;
+    border-right:none;
+    border-bottom:none;
+    
+}
+
+.search-bar{
+    display:flex;
+}
+.logo{
+    display:flex;
+    width:100px;
+    padding-left:20px;
+    margin-left:20px;
+}
+.left-section{
+    background-color: lightblue;
+
+}
+.middle-section{
+    display:flex;
+    align-items:center;
+    background-color: lightpink;
+}
+.right-section{
+    display:flex;
+    align-items: center;
+    width:300px;
+    background-color: lightblue;
+    padding-left:10px;
+}
+.signup{
+    display:flex;
+}
+.wishlist{
+    margin:0px 30px 0px 30px;
+}
+.cart{
+
+}
+
+.list{
+    display:flex;
+    justify-content: space-between;
+    padding-left:40px;
+    padding-right:40px;
+    font-weight: 520;
+    border:solid;
+    border-width:1px;
+    border-left:none;
+    border-right:none;
+}
+

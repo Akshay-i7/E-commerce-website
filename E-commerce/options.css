@@ -1,0 +1,9 @@
+.options{
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+    height: 110px;
+    background-color: aqua;
+    padding-left:10px;
+    padding-right:10px;
+}
