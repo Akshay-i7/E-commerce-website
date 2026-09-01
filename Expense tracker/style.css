@@ -1,0 +1,352 @@
+:root{
+  --shell-bg:     #1c1b19;
+  --shell-text:   #ede6d6;
+  --shell-line:   #3a372f;
+
+  --paper:        #f5f0e6;
+  --paper-edge:   #e7ddc9;
+  --rule:         #ddd2b8;
+
+  --ink:          #2b2620;
+  --ink-soft:     #6b6255;
+
+  --brass:        #b8925a;
+  --brass-dark:   #8f6f44;
+
+  --red:          #9e3b2b;
+  --green:        #2f5233;
+
+  --radius: 6px;
+  --shadow: 0 18px 40px rgba(0,0,0,0.35);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ==========================================================
+   RESET
+   ========================================================== */
+*, *::before, *::after{ box-sizing: border-box; }
+html, body{ margin:0; padding:0; }
+body{
+  background: var(--shell-bg);
+  color: var(--shell-text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  padding: clamp(16px, 4vw, 48px);
+}
+h1,h2,h3{ margin:0; font-family: var(--font-display); }
+button{ font-family: inherit; cursor: pointer; }
+input, select{ font-family: inherit; }
+table{ border-collapse: collapse; width: 100%; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; }
+}
+
+/* ==========================================================
+   SHELL / HEADER
+   ========================================================== */
+.app{
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.app-header{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 18px;
+  border-bottom: 3px solid var(--brass);
+}
+
+.app-header .eyebrow{
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 6px;
+}
+
+.app-header h1{
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 600;
+  color: var(--shell-text);
+}
+
+.app-header .date{
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--shell-text);
+  opacity: 0.7;
+}
+
+/* ==========================================================
+   LEDGER SHEET (the paper)
+   ========================================================== */
+.ledger-sheet{
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-top: 28px;
+  padding: 32px clamp(20px, 4vw, 44px) 28px;
+  overflow: hidden;
+}
+
+/* the red margin rule, like a school exercise book */
+.ledger-sheet::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(48px, 8vw, 72px);
+  width: 1px;
+  background: rgba(158, 59, 43, 0.35);
+}
+
+.ledger-sheet > *{
+  position: relative;
+}
+
+/* ==========================================================
+   SUMMARY ROW
+   ========================================================== */
+.summary-row{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-bottom: 20px;
+  /* the double rule = the bookkeeping symbol for a final total */
+  border-bottom: 4px double var(--brass-dark);
+}
+
+.stat .label{
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.stat .value{
+  font-family: var(--font-mono);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat .value.credit{ color: var(--green); }
+.stat .value.debit{ color: var(--red); }
+.stat .value.balance{ color: var(--ink); } /* "in the black" */
+
+/* ==========================================================
+   NEW ENTRY FORM
+   ========================================================== */
+.new-entry{
+  margin-top: 28px;
+}
+
+.new-entry legend,
+.new-entry .section-title{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass-dark);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.entry-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr 1fr;
+  gap: 10px;
+  align-items: end;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field label{
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.field input,
+.field select{
+  border: 1px solid var(--rule);
+  background: #fffdf8;
+  color: var(--ink);
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.field input:focus,
+.field select:focus{
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+}
+
+.type-toggle{
+  display: inline-flex;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.type-toggle input{
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.type-toggle label{
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  background: #fffdf8;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.type-toggle input:checked + label{
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.type-toggle label:first-of-type{ border-right: 1px solid var(--rule); }
+
+.add-btn{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: var(--brass);
+  color: var(--shell-bg);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.add-btn:hover{ background: var(--brass-dark); transform: scale(1.05); }
+.add-btn:focus-visible{ outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.form-note{
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ==========================================================
+   TRANSACTIONS TABLE
+   Real ledgers rule off rows horizontally only — no vertical
+   grid lines.
+   ========================================================== */
+.transactions{
+  margin-top: 32px;
+}
+
+.transactions table{
+  margin-top: 4px;
+}
+
+.transactions thead th{
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 500;
+  padding: 0 8px 10px;
+  border-bottom: 1px solid var(--brass-dark);
+}
+
+.transactions thead th.num{ text-align: right; }
+
+.transactions tbody td{
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.transactions tbody tr:hover{
+  background: rgba(184, 146, 90, 0.08);
+}
+
+.transactions td.date{
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.tag{
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+td.amount{
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+td.amount.credit{ color: var(--green); }
+td.amount.debit{ color: var(--red); }
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+.app-footer{
+  margin-top: 22px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--shell-text);
+  opacity: 0.55;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+@media (max-width: 720px){
+  .summary-row{
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .entry-row{
+    grid-template-columns: 1fr;
+  }
+  .add-btn{ justify-self: start; }
+  .transactions{
+    overflow-x: auto;
+  }
+  .transactions table{ min-width: 520px; }
+}

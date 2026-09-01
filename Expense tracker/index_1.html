@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense Ledger</title>
+<meta name="description" content="Personal Expense Tracker — frontend">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="app">
+
+  <header class="app-header">
+    <div>
+      <span class="eyebrow">Personal Ledger &middot; No. 001</span>
+      <h1>Expense Ledger</h1>
+    </div>
+    <span class="date">Saturday, 1 August 2026</span>
+  </header>
+
+  <main class="ledger-sheet">
+
+    <!-- SUMMARY -->
+    <section class="summary-row" aria-label="Summary">
+      <div class="stat">
+        <span class="label">Balance</span>
+        <span class="value balance">&#8377;30,529.50</span>
+      </div>
+      <div class="stat">
+        <span class="label">Income</span>
+        <span class="value credit">&#8377;34,500.00</span>
+      </div>
+      <div class="stat">
+        <span class="label">Expenses</span>
+        <span class="value debit">&#8377;3,970.50</span>
+      </div>
+    </section>
+
+    <!-- NEW ENTRY -->
+    <!--
+      Not wired up yet — this is markup + styling only.
+      When you're ready: add a <script> that listens for
+      "submit", reads FormData, and either (a) pushes a new
+      row into the table client-side, or (b) POSTs to your
+      Spring Boot API and re-renders from the response.
+    -->
+    <form class="new-entry" onsubmit="return false;">
+      <span class="section-title">New Entry</span>
+      <div class="entry-row">
+        <div class="field">
+          <label for="entry-date">Date</label>
+          <input type="date" id="entry-date" name="date" required>
+        </div>
+        <div class="field">
+          <label for="entry-desc">Description</label>
+          <input type="text" id="entry-desc" name="description" placeholder="e.g. Grocery shopping" required>
+        </div>
+        <div class="field">
+          <label for="entry-category">Category</label>
+          <select id="entry-category" name="category">
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Bills</option>
+            <option>Subscriptions</option>
+            <option>Entertainment</option>
+            <option>Shopping</option>
+            <option>Health</option>
+            <option>Income</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="entry-amount">Amount</label>
+          <input type="number" id="entry-amount" name="amount" min="0" step="0.01" placeholder="0.00" required>
+        </div>
+        <div class="field">
+          <label id="type-label">Type</label>
+          <div class="type-toggle" role="radiogroup" aria-labelledby="type-label">
+            <input type="radio" id="type-expense" name="type" value="expense" checked>
+            <label for="type-expense">Expense</label>
+            <input type="radio" id="type-income" name="type" value="income">
+            <label for="type-income">Income</label>
+          </div>
+        </div>
+        <button type="submit" class="add-btn" aria-label="Add entry">+</button>
+      </div>
+      <p class="form-note">Form isn't functional yet — add JavaScript when you're ready to make it interactive.</p>
+    </form>
+
+    <!-- TRANSACTIONS -->
+    <section class="transactions" aria-label="Transactions">
+      <span class="section-title">Recent Entries</span>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th class="num">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date">Aug 01</td>
+            <td>Grocery Shopping</td>
+            <td><span class="tag">Food</span></td>
+            <td class="amount debit">&minus;&#8377;1,240.00</td>
+          </tr>
+          <tr>
+            <td class="date">Jul 31</td>
+            <td>Monthly Salary</td>
+            <td><span class="tag">Income</span></td>
+            <td class="amount credit">+&#8377;28,000.00</td>
+          </tr>
+          <tr>
+            <td class="date">Jul 30</td>
+            <td>Netflix Subscription</td>
+            <td><span class="tag">Subscriptions</span></td>
+            <td class="amount debit">&minus;&#8377;499.00</td>
+          </tr>
+          <tr>
+            <td class="date">Jul 29</td>
+            <td>Uber Rides</td>
+            <td><span class="tag">Transport</span></td>
+            <td class="amount debit">&minus;&#8377;356.50</td>
+          </tr>
+          <tr>
+            <td class="date">Jul 28</td>
+            <td>Electricity Bill</td>
+            <td><span class="tag">Bills</span></td>
+            <td class="amount debit">&minus;&#8377;1,875.00</td>
+          </tr>
+          <tr>
+            <td class="date">Jul 25</td>
+            <td>Freelance Project</td>
+            <td><span class="tag">Income</span></td>
+            <td class="amount credit">+&#8377;6,500.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    Personal Ledger &mdash; static HTML &amp; CSS. JavaScript and backend wiring coming next.
+  </footer>
+
+</div>
+<script src="script.js"></script>
+
+</body>
+</html>
