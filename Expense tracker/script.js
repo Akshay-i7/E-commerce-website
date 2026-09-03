@@ -22,17 +22,27 @@ addBtn.addEventListener("click", function() {
     let amount=Number(entryAmount.value);
     let category=entryCategory.value;
     let date=entryDate.value;
+    let formattedDate = new Date(`${date}T00:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit"
+    });
+    let type=document.querySelector('input[name="type"]:checked').value;
     console.log(desc, amount, category, date);
     let row=document.createElement("tr");
     let dateCell=document.createElement("td");
     let descCell=document.createElement("td");
     let categoryCell=document.createElement("td");
     let amountCell=document.createElement("td");
-    dateCell.textContent=date;
+    let categoryTag=document.createElement("span");
+    dateCell.textContent=formattedDate;
     descCell.textContent=desc;
-    categoryCell.textContent=category;
-    amountCell.textContent=amount;
+    dateCell.classList.add("date");
+    categoryTag.textContent=category;
+    categoryTag.classList.add("tag");
+    categoryCell.appendChild(categoryTag);
+    amountCell.textContent=`${type === "income" ? "+" : "-"}₹${amount.toFixed(2)}`;
+    amountCell.classList.add("amount", type === "income" ? "credit" : "debit");
     row.append(dateCell,descCell,categoryCell,amountCell);
-    entriesList.appendChild(row);
+    entriesList.prepend(row);
     
 });
