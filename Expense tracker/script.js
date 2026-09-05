@@ -46,3 +46,11 @@ addBtn.addEventListener("click", function() {
     entriesList.prepend(row);
     
 });
+
+//take the values from entries list and calculate the total income, total expense and balance
+let totalIncome=document.querySelector(".credit");
+let totalExpense=document.querySelector(".debit");
+let balance=document.querySelector(".balance");
+totalIncome.textContent="₹0.00";
+totalExpense.textContent="₹0.00";
+balance.textContent="₹0.00";
