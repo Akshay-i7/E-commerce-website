@@ -44,7 +44,7 @@ addBtn.addEventListener("click", function() {
     amountCell.classList.add("amount", type === "income" ? "credit" : "debit");
     row.append(dateCell,descCell,categoryCell,amountCell);
     entriesList.prepend(row);
-    
+    updateTotals();
 });
 
 //take the values from entries list and calculate the total income, total expense and balance
@@ -54,3 +54,22 @@ let balance=document.querySelector(".balance");
 totalIncome.textContent="₹0.00";
 totalExpense.textContent="₹0.00";
 balance.textContent="₹0.00";
+
+//update the total income, total expense and balance when we add a new entry
+function updateTotals() {
+    let income=0;
+    let expense=0;
+    let rows=entriesList.querySelectorAll("tr");
+    rows.forEach(row => {
+        let amountCell=row.querySelector(".amount");
+        let amount=Number(amountCell.textContent.replace(/[^0-9.-]+/g,""));
+        if(amountCell.classList.contains("credit")) {
+            income+=amount;
+        } else {
+            expense+=amount;
+        }
+    });
+    totalIncome.textContent=`₹${income.toFixed(2)}`;
+    totalExpense.textContent=`₹${expense.toFixed(2)}`;
+    balance.textContent=`₹${(income - expense).toFixed(2)}`;
+};
