@@ -253,9 +253,14 @@ table{ border-collapse: collapse; width: 100%; }
   color: var(--ink-soft);
   font-style: italic;
 }
+.transactions td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
 .delete-btn {
   border: none;
-  background: #9e3b2b;
+  background: var(--red);
   color: white;
   padding: 6px 10px;
   border-radius: 4px;

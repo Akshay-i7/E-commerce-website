@@ -37,6 +37,8 @@ addBtn.addEventListener("click", function() {
     deleteBtn.textContent="Delete";
     deleteBtn.classList.add("delete-btn");
     deleteBtn.hidden=true;
+    let deleteCell=document.createElement("td");
+    deleteCell.appendChild(deleteBtn);
     let categoryTag=document.createElement("span");
     dateCell.textContent=formattedDate;
     descCell.textContent=desc;
@@ -46,7 +48,7 @@ addBtn.addEventListener("click", function() {
     categoryCell.appendChild(categoryTag);
     amountCell.textContent=`${type === "income" ? "+" : "-"}₹${amount.toFixed(2)}`;
     amountCell.classList.add("amount", type === "income" ? "credit" : "debit");
-    row.append(dateCell,descCell,categoryCell,amountCell,deleteBtn);
+    row.append(dateCell,descCell,categoryCell,amountCell,deleteCell);
     entriesList.prepend(row);
     updateTotals();
 });
