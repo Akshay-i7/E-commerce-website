@@ -73,3 +73,9 @@ function updateTotals() {
     totalExpense.textContent=`₹${expense.toFixed(2)}`;
     balance.textContent=`₹${(income - expense).toFixed(2)}`;
 };
+let currentDate=new Date();
+let currentMonth=currentDate.getMonth();
+let currentYear=currentDate.getFullYear();
+let showDate=document.querySelector(".app-header .date");
+showDate.textContent=`${currentDate.getDate()}${currentDate.getDate() === 1 ? "st" : currentDate.getDate() === 2 ? "nd" : currentDate.getDate() === 3 ? "rd" : "th"} ${currentDate.toLocaleString("default", { month: "long" })} ${currentYear}`;  
+
