@@ -33,6 +33,10 @@ addBtn.addEventListener("click", function() {
     let descCell=document.createElement("td");
     let categoryCell=document.createElement("td");
     let amountCell=document.createElement("td");
+    let deleteBtn=document.createElement("button");
+    deleteBtn.textContent="Delete";
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.hidden=true;
     let categoryTag=document.createElement("span");
     dateCell.textContent=formattedDate;
     descCell.textContent=desc;
@@ -42,7 +46,7 @@ addBtn.addEventListener("click", function() {
     categoryCell.appendChild(categoryTag);
     amountCell.textContent=`${type === "income" ? "+" : "-"}₹${amount.toFixed(2)}`;
     amountCell.classList.add("amount", type === "income" ? "credit" : "debit");
-    row.append(dateCell,descCell,categoryCell,amountCell);
+    row.append(dateCell,descCell,categoryCell,amountCell,deleteBtn);
     entriesList.prepend(row);
     updateTotals();
 });
@@ -79,3 +83,17 @@ let currentYear=currentDate.getFullYear();
 let showDate=document.querySelector(".app-header .date");
 showDate.textContent=`${currentDate.getDate()}${currentDate.getDate() === 1 ? "st" : currentDate.getDate() === 2 ? "nd" : currentDate.getDate() === 3 ? "rd" : "th"} ${currentDate.toLocaleString("default", { month: "long" })} ${currentYear}`;  
 
+//when we click on the row in recent entries we will delete the entry from the list
+entriesList.addEventListener("click", function(event) {
+    let row =event.target.closest("tr");
+    if(!row) {
+        return;
+    }
+    let deleteBtn=row.querySelector(".delete-btn");
+    if(event.target === deleteBtn) {
+        row.remove();
+        updateTotals();
+        return;
+    }
+    deleteBtn.hidden=!deleteBtn.hidden;
+});

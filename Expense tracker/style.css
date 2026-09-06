@@ -253,7 +253,18 @@ table{ border-collapse: collapse; width: 100%; }
   color: var(--ink-soft);
   font-style: italic;
 }
+.delete-btn {
+  border: none;
+  background: #9e3b2b;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
+.delete-btn:hover {
+  background: #70291f;
+}
 /* ==========================================================
    TRANSACTIONS TABLE
    Real ledgers rule off rows horizontally only — no vertical
@@ -321,17 +332,7 @@ td.amount{
 td.amount.credit{ color: var(--green); }
 td.amount.debit{ color: var(--red); }
 
-/* ==========================================================
-   FOOTER
-   ========================================================== */
-.app-footer{
-  margin-top: 22px;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--shell-text);
-  opacity: 0.55;
-}
+
 
 /* ==========================================================
    RESPONSIVE
